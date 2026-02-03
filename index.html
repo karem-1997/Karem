@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Helmy Card - Dashboard</title>
+    <title>Helmy Card - Pro System</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
         :root {
@@ -20,7 +20,6 @@
             border-radius: 30px; padding: 30px; width: 100%; max-width: 500px; 
             box-shadow: 0 25px 50px rgba(0,0,0,0.9); position: relative;
         }
-        /* لوحة التحكم */
         #adminPanel {
             display: none; background: #0f0f0f; border: 2px solid #bf953f;
             padding: 20px; border-radius: 20px; position: absolute;
@@ -40,7 +39,7 @@
         label { display: block; margin-bottom: 5px; font-size: 13px; color: var(--text-gold); font-weight: bold; }
         input, select {
             width: 100%; background: #151515; border: 1px solid rgba(191, 149, 63, 0.2);
-            border-radius: 10px; padding: 10px; color: white; box-sizing: border-box; outline: none;
+            border-radius: 10px; padding: 10px; color: white; box-sizing: border-box; outline: none; font-family: 'Tajawal';
         }
         .calc-box { background: rgba(191, 149, 63, 0.05); padding: 15px; border-radius: 15px; text-align: center; margin: 15px 0; border: 1px solid rgba(191, 149, 63, 0.1); }
         .calc-value { font-size: 22px; font-weight: 700; color: #fff; }
@@ -58,53 +57,40 @@
 <div class="form-card">
     <div id="adminPanel">
         <h2 style="color:gold; text-align:center; margin-top:0;">⚙️ إعدادات النظام</h2>
-        
         <div class="input-group"><label>اسم الموقع</label><input type="text" id="set_main_title"></div>
         <div class="input-group"><label>نص التحذير</label><input type="text" id="set_warn_text"></div>
-        
         <div class="admin-grid">
             <div class="input-group"><label>ID السحب</label><input type="text" id="set_admin_id"></div>
             <div class="input-group"><label>اسم المستلم</label><input type="text" id="set_admin_name"></div>
         </div>
-
-        <hr style="border:0.5px solid #333">
         <h4 style="color:gold; margin:10px 0;">أسماء الخانات</h4>
         <div class="admin-grid">
-            <div class="input-group"><label>خانة ID المستخدم</label><input type="text" id="set_lbl_uid"></div>
-            <div class="input-group"><label>خانة اسم الوكيل</label><input type="text" id="set_lbl_agent"></div>
+            <div class="input-group"><label>خانة الأيدي</label><input type="text" id="set_lbl_uid"></div>
+            <div class="input-group"><label>خانة الوكيل</label><input type="text" id="set_lbl_agent"></div>
         </div>
-
-        <h4 style="color:gold; margin:10px 0;">أسعار الصرف (ج.م لكل 1$)</h4>
+        <h4 style="color:gold; margin:10px 0;">أسعار الصرف</h4>
         <div class="admin-grid">
             <div class="input-group"><label>فودافون</label><input type="number" step="0.1" id="rate_voda"></div>
             <div class="input-group"><label>اتصالات</label><input type="number" step="0.1" id="rate_eti"></div>
             <div class="input-group"><label>أورنج</label><input type="number" step="0.1" id="rate_ora"></div>
             <div class="input-group"><label>كود الوكيل</label><input type="number" step="0.1" id="rate_agent"></div>
         </div>
-
-        <button class="admin-save-btn" onclick="saveSettings()">حفظ وتطبيق التغييرات ✅</button>
-        <button onclick="document.getElementById('adminPanel').style.display='none'" style="width:100%; background:transparent; color:gray; border:none; margin-top:10px; cursor:pointer;">إلغاء</button>
+        <button class="admin-save-btn" onclick="saveSettings()">حفظ التعديلات ✅</button>
+        <button onclick="document.getElementById('adminPanel').style.display='none'" style="width:100%; background:transparent; color:gray; border:none; margin-top:10px; cursor:pointer;">إغلاق</button>
     </div>
 
     <div class="header" onclick="checkAdmin()">
         <h1 id="disp_title">Helmy Card 🔗</h1>
-        <span id="disp_warn" style="color:#ff4d4d; font-size:13px; font-weight:bold; display:block; margin-top:5px;"></span>
+        <span id="disp_warn" style="color:#ff4d4d; font-size:12px; font-weight:bold; display:block; margin-top:5px;"></span>
         <div class="copy-box" onclick="copyId()">
-            ID سحب: <b id="disp_admin_id"></b><br>
-            الاسم: <b id="disp_admin_name"></b><br>
+            ID سحب: <b id="disp_admin_id">800050</b><br>
+            الاسم: <b id="disp_admin_name">Helmy fire</b><br>
             <small>انقر هنا للنسخ 👆</small>
         </div>
     </div>
 
-    <div class="input-group">
-        <label id="lbl_uid"></label>
-        <input type="text" id="user_id">
-    </div>
-
-    <div class="input-group">
-        <label id="lbl_agent"></label>
-        <input type="text" id="agent_name">
-    </div>
+    <div class="input-group"><label id="lbl_uid">🆔 الأيدي</label><input type="text" id="user_id"></div>
+    <div class="input-group"><label id="lbl_agent">👤 الوكيل</label><input type="text" id="agent_name"></div>
 
     <div class="input-group">
         <label>طريقة الدفع</label>
@@ -121,19 +107,10 @@
         <input type="number" id="dollars" placeholder="0.00" oninput="calculate()">
     </div>
 
-    <div class="calc-box">
-        <div class="calc-value" id="res-egp">الإجمالي: 0.00 ج.م</div>
-    </div>
+    <div class="calc-box"><div class="calc-value" id="res-egp">الإجمالي: 0.00 ج.م</div></div>
 
-    <div class="input-group">
-        <label>رقم الاستلام (المحفظة)</label>
-        <input type="text" id="wallet" placeholder="01xxxxxxxxx">
-    </div>
-
-    <div class="input-group">
-        <label>صورة التحويل (Screenshot)</label>
-        <input type="file" id="screenshot" accept="image/*">
-    </div>
+    <div class="input-group"><label>رقم الاستلام</label><input type="text" id="wallet" placeholder="01xxxxxxxxx"></div>
+    <div class="input-group"><label>صورة التحويل</label><input type="file" id="screenshot" accept="image/*"></div>
 
     <button onclick="submitForm()" id="submitBtn">إرسال الطلب الآن 🚀</button>
 </div>
@@ -141,20 +118,17 @@
 <div id="invoiceOverlay">
     <div class="invoice-box">
         <h2 style="color:gold">تم الإرسال بنجاح ✅</h2>
-        <div id="invoice_details" style="text-align:right; font-size:14px; color:#ccc; line-height:2;"></div>
+        <div id="invoice_details" style="text-align:right; font-size:14px; color:#ccc; line-height:1.8;"></div>
         <button onclick="location.reload()" class="admin-save-btn">إغلاق</button>
     </div>
 </div>
 
 <script>
-    // الإعدادات الافتراضية الشاملة
     let config = {
         title: "Helmy Card 🔗",
         warn: "يستغرق تأكيد التارجت وإرسال الأموال 24 ساعة",
-        adminId: "800050",
-        adminName: "Helmy fire",
-        lblUid: "🆔 ID الحساب المسحوب منه",
-        lblAgent: "👤 اسم الوكيل (إن وجد)",
+        adminId: "800050", adminName: "Helmy fire",
+        lblUid: "🆔 الأيدي", lblAgent: "👤 الوكيل",
         rates: { voda: 45, eti: 45, ora: 45, agent: 46.5 }
     };
 
@@ -163,13 +137,12 @@
     const TG_CHAT_ID = "7054064246";
 
     window.onload = function() {
-        const saved = localStorage.getItem('helmy_pro_config');
+        const saved = localStorage.getItem('helmy_final_cfg');
         if(saved) config = JSON.parse(saved);
         applyConfig();
     };
 
     function applyConfig() {
-        // تحديث الواجهة
         document.getElementById('disp_title').innerText = config.title;
         document.getElementById('disp_warn').innerText = config.warn;
         document.getElementById('disp_admin_id').innerText = config.adminId;
@@ -177,7 +150,6 @@
         document.getElementById('lbl_uid').innerText = config.lblUid;
         document.getElementById('lbl_agent').innerText = config.lblAgent;
         
-        // تعبئة لوحة التحكم
         document.getElementById('set_main_title').value = config.title;
         document.getElementById('set_warn_text').value = config.warn;
         document.getElementById('set_admin_id').value = config.adminId;
@@ -191,11 +163,7 @@
         calculate();
     }
 
-    function checkAdmin() {
-        if(prompt("كلمة سر الإدارة:") === "1997") {
-            document.getElementById('adminPanel').style.display = 'block';
-        }
-    }
+    function checkAdmin() { if(prompt("كلمة سر الإدارة:") === "1997") document.getElementById('adminPanel').style.display = 'block'; }
 
     function saveSettings() {
         config.title = document.getElementById('set_main_title').value;
@@ -208,21 +176,18 @@
         config.rates.eti = parseFloat(document.getElementById('rate_eti').value);
         config.rates.ora = parseFloat(document.getElementById('rate_ora').value);
         config.rates.agent = parseFloat(document.getElementById('rate_agent').value);
-        
-        localStorage.setItem('helmy_pro_config', JSON.stringify(config));
+        localStorage.setItem('helmy_final_cfg', JSON.stringify(config));
         applyConfig();
         document.getElementById('adminPanel').style.display = 'none';
-        alert("تم الحفظ بنجاح!");
     }
 
     function calculate() {
         const usd = document.getElementById('dollars').value || 0;
-        const method = document.getElementById('method').value;
+        const m = document.getElementById('method').value;
         let r = config.rates.voda;
-        if(method.includes("اتصالات")) r = config.rates.eti;
-        if(method.includes("أورنج")) r = config.rates.ora;
-        if(method.includes("الوكيل")) r = config.rates.agent;
-        
+        if(m.includes("اتصالات")) r = config.rates.eti;
+        else if(m.includes("أورنج")) r = config.rates.ora;
+        else if(m.includes("الوكيل")) r = config.rates.agent;
         document.getElementById('res-egp').innerText = "الإجمالي: " + (usd * r).toFixed(2) + " ج.م";
     }
 
@@ -230,22 +195,28 @@
         const btn = document.getElementById('submitBtn');
         const uid = document.getElementById('user_id').value;
         const agent = document.getElementById('agent_name').value || "لا يوجد";
-        const usd = document.getElementById('dollars').value;
+        const usdValue = document.getElementById('dollars').value;
         const wallet = document.getElementById('wallet').value;
         const photo = document.getElementById('screenshot').files[0];
+        const method = document.getElementById('method').value;
 
-        if(!uid || !usd || !wallet || !photo) return alert("اكمل البيانات أولاً!");
+        if(!uid || !usdValue || !wallet || !photo) return alert("اكمل البيانات!");
 
-        btn.disabled = true; btn.innerText = "جاري الإرسال...";
+        btn.disabled = true; btn.innerText = "جاري الحفظ وإرسال الطلب...";
 
         try {
-            const method = document.getElementById('method').value;
-            const rate = method.includes("الوكيل") ? config.rates.agent : config.rates.voda; 
-            const egp = (usd * rate).toFixed(2);
-            const now = new Date().toLocaleString('ar-EG');
+            let rate = config.rates.voda;
+            if(method.includes("اتصالات")) rate = config.rates.eti;
+            else if(method.includes("أورنج")) rate = config.rates.ora;
+            else if(method.includes("الوكيل")) rate = config.rates.agent;
 
-            // إرسال تليجرام
-            const msg = `🧾 *طلب جديد*\n🆔 ID: ${uid}\n👤 الوكيل: ${agent}\n💵 دولار: ${usd}$\n🇪🇬 مصري: ${egp}\n💳 طريقة: ${method}\n🏦 محفظة: ${wallet}\n⏰ وقت: ${now}`;
+            const egpVal = (usdValue * rate).toFixed(2);
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-GB');
+            const timeStr = now.toLocaleTimeString('ar-EG');
+
+            // 1. إرسال تليجرام (كامل التفاصيل)
+            const msg = `🧾 *طلب سحب جديد*\n\n🆔 الأيدي: ${uid}\n👤 الوكيل: ${agent}\n💵 دولار: ${usdValue}$\n🇪🇬 مصري: ${egpVal} ج.م\n💳 الطريقة: ${method}\n🏦 المحفظة: ${wallet}\n📅 التاريخ: ${dateStr} ${timeStr}`;
             const formData = new FormData();
             formData.append('chat_id', TG_CHAT_ID);
             formData.append('photo', photo);
@@ -253,25 +224,30 @@
             formData.append('parse_mode', 'Markdown');
             await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendPhoto`, { method: 'POST', body: formData });
 
-            // إرسال SheetDB
+            // 2. إرسال SheetDB (تأكد أن أسماء الأعمدة في الشيت تطابق هذه الأسماء)
             await fetch(SHEET_URL, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ data: [{ "الأيدي": uid, "الدولار": usd, "المصري": egp, "التاريخ": now }]})
+                body: JSON.stringify({ data: [{ 
+                    "الأيدي": uid, 
+                    "اسم الوكيل": agent,
+                    "الدولار": usdValue + " $",
+                    "المصري": egpVal + " ج.م",
+                    "طريقة السحب": method,
+                    "بيانات المحفظة": "'" + wallet,
+                    "التاريخ": dateStr + " " + timeStr
+                }]})
             });
 
-            document.getElementById('invoice_details').innerHTML = `ID: ${uid}<br>المبلغ: ${egp} ج.م<br>الطريقة: ${method}<br>الوقت: ${now}`;
+            document.getElementById('invoice_details').innerHTML = `<b>ID:</b> ${uid}<br><b>الوكيل:</b> ${agent}<br><b>المبلغ:</b> ${egpVal} ج.م<br><b>الطريقة:</b> ${method}<br><b>الوقت:</b> ${dateStr}`;
             document.getElementById('invoiceOverlay').style.display = 'flex';
         } catch(e) {
-            alert("خطأ في الإرسال!");
-            btn.disabled = false;
+            alert("حدث خطأ، تأكد من الاتصال بالإنترنت.");
+            btn.disabled = false; btn.innerText = "إرسال الطلب الآن 🚀";
         }
     }
 
-    function copyId() {
-        navigator.clipboard.writeText(config.adminId);
-        alert("تم نسخ الأيدي بنجاح ✅");
-    }
+    function copyId() { navigator.clipboard.writeText(config.adminId); alert("تم نسخ الأيدي ✅"); }
 </script>
 </body>
 </html>
